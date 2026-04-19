@@ -1,5 +1,6 @@
 'use client'
 import { useEffect, useState } from 'react'
+import { motion } from 'framer-motion'
 import { X } from 'lucide-react'
 
 interface UndoToastProps {
@@ -24,22 +25,35 @@ export function UndoToast({ message, onUndo, onExpire, duration = 5000 }: UndoTo
   }, [duration, onExpire])
 
   return (
-    <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 min-w-[280px] bg-[#1a1a2e] border border-[rgba(255,255,255,0.1)] rounded-xl shadow-2xl overflow-hidden">
+    <motion.div
+      initial={{ opacity: 0, y: 16, scale: 0.95 }}
+      animate={{ opacity: 1, y: 0, scale: 1 }}
+      exit={{ opacity: 0, y: 8, scale: 0.97 }}
+      transition={{ type: 'spring', stiffness: 400, damping: 30 }}
+      className="fixed bottom-20 md:bottom-6 left-1/2 -translate-x-1/2 z-50 min-w-[300px] rounded-xl overflow-hidden border border-[rgba(255,255,255,0.1)] shadow-2xl"
+      style={{ background: 'rgba(16,16,28,0.96)', backdropFilter: 'blur(24px)' }}
+    >
       <div className="flex items-center gap-3 px-4 py-3">
-        <span className="text-[13px] text-[#ededef] flex-1">{message}</span>
+        <span className="text-[13px] font-medium text-[#f0f0f5] flex-1">{message}</span>
         <button
           onClick={onUndo}
-          className="text-[13px] font-semibold text-[#a5aaee] hover:text-[#5E6AD2] transition-colors"
+          className="text-[13px] font-bold text-[#7C6FF7] hover:text-[#9d93f9] transition-colors"
         >
           Undo
         </button>
-        <button onClick={onExpire} className="text-[#4a4f5a] hover:text-[#8a8f98] transition-colors ml-1">
+        <button
+          onClick={onExpire}
+          className="text-[#454a5c] hover:text-[#9099b0] transition-colors ml-1 p-0.5"
+        >
           <X className="w-3.5 h-3.5" />
         </button>
       </div>
       <div className="h-[2px] bg-[rgba(255,255,255,0.05)]">
-        <div className="h-full bg-[#5E6AD2]" style={{ width: `${progress}%`, transition: 'none' }} />
+        <div
+          className="h-full bg-gradient-to-r from-[#7C6FF7] to-[#5E9EF7]"
+          style={{ width: `${progress}%`, transition: 'none' }}
+        />
       </div>
-    </div>
+    </motion.div>
   )
 }

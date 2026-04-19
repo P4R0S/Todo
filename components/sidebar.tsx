@@ -1,7 +1,7 @@
 'use client'
 import Link from 'next/link'
 import { usePathname, useRouter } from 'next/navigation'
-import { Zap, List, Plus, LogOut, CheckSquare } from 'lucide-react'
+import { Zap, List, Plus, LogOut, Focus } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { createClient } from '@/lib/supabase/client'
 import type { Project } from '@/lib/types'
@@ -22,69 +22,115 @@ export function Sidebar({ projects, userEmail }: SidebarProps) {
   }
 
   return (
-    <aside className="w-[220px] min-w-[220px] h-full bg-[rgba(255,255,255,0.02)] border-r border-[rgba(255,255,255,0.06)] flex flex-col py-4 px-3">
-      <div className="flex items-center gap-2.5 px-2.5 mb-5">
-        <div className="w-7 h-7 rounded-lg bg-gradient-to-br from-[#5E6AD2] to-[#7C85E8] flex items-center justify-center flex-shrink-0">
-          <CheckSquare className="w-3.5 h-3.5 text-white" />
+    <aside className="w-[220px] min-w-[220px] h-full flex flex-col py-4 px-3 border-r border-[rgba(255,255,255,0.05)] bg-[rgba(0,0,0,0.25)] backdrop-blur-xl">
+
+      {/* Logo */}
+      <div className="flex items-center gap-2.5 px-2.5 mb-6">
+        <div className="w-7 h-7 rounded-lg bg-gradient-to-br from-[#7C6FF7] to-[#5E9EF7] flex items-center justify-center flex-shrink-0 shadow-[0_0_16px_rgba(124,111,247,0.4)]">
+          <Focus className="w-3.5 h-3.5 text-white" strokeWidth={2} />
         </div>
-        <span className="text-[15px] font-bold tracking-tight">Focus</span>
+        <span className="text-[15px] font-bold tracking-tight" style={{ fontFamily: 'var(--font-display)' }}>Focus</span>
       </div>
 
-      <NavItem href="/today" icon={<Zap className="w-3.5 h-3.5" />} label="Today" active={pathname === '/today'} />
-      <NavItem href="/all"   icon={<List className="w-3.5 h-3.5" />} label="All Tasks" active={pathname === '/all'} />
+      {/* Main nav */}
+      <div className="space-y-0.5">
+        <SidebarItem href="/today"  icon={<Zap className="w-3.5 h-3.5" />}  label="Today"     active={pathname === '/today'} />
+        <SidebarItem href="/all"    icon={<List className="w-3.5 h-3.5" />} label="All Tasks" active={pathname === '/all'} />
+      </div>
 
-      <p className="text-[10px] font-semibold text-[#4a4f5a] uppercase tracking-[0.8px] px-2.5 mt-4 mb-1">Projects</p>
-
-      {projects.map(p => (
-        <NavItem
-          key={p.id}
-          href={`/projects/${p.id}`}
-          icon={<span className="w-2 h-2 rounded-full flex-shrink-0" style={{ background: p.color }} />}
-          label={p.name}
-          active={pathname === `/projects/${p.id}`}
-        />
-      ))}
-
-      <Link
-        href="/projects/new"
-        className="flex items-center gap-2 px-2.5 py-2 rounded-lg text-[#4a4f5a] hover:text-[#8a8f98] hover:bg-[rgba(255,255,255,0.03)] transition-colors duration-150 mt-1"
-      >
-        <Plus className="w-3.5 h-3.5" />
-        <span className="text-[12px]">Add project</span>
-      </Link>
-
-      <div className="mt-auto flex items-center gap-2 px-2.5 py-2">
-        <div className="w-7 h-7 rounded-full bg-gradient-to-br from-[#5E6AD2] to-[#34d399] flex items-center justify-center text-[11px] font-semibold text-white flex-shrink-0">
-          {userEmail[0]?.toUpperCase() ?? '?'}
+      {/* Projects */}
+      <div className="mt-5">
+        <p className="text-[10px] font-semibold text-[#454a5c] uppercase tracking-[1px] px-2.5 mb-1.5"
+           style={{ fontFamily: 'var(--font-display)' }}>
+          Projects
+        </p>
+        <div className="space-y-0.5">
+          {projects.map(p => (
+            <ProjectItem
+              key={p.id}
+              href={`/projects/${p.id}`}
+              label={p.name}
+              color={p.color}
+              active={pathname === `/projects/${p.id}`}
+            />
+          ))}
+          <Link
+            href="/projects/new"
+            className="flex items-center gap-2 px-2.5 py-1.5 rounded-lg text-[#454a5c] hover:text-[#9099b0] hover:bg-[rgba(255,255,255,0.03)] transition-all duration-150 mt-0.5"
+          >
+            <Plus className="w-3 h-3" />
+            <span className="text-[12px] font-medium">New project</span>
+          </Link>
         </div>
-        <span className="text-[11px] text-[#8a8f98] truncate flex-1">{userEmail}</span>
-        <button
-          onClick={handleSignOut}
-          className="text-[#4a4f5a] hover:text-[#8a8f98] transition-colors"
-          aria-label="Sign out"
-        >
-          <LogOut className="w-3.5 h-3.5" />
-        </button>
+      </div>
+
+      {/* User */}
+      <div className="mt-auto">
+        <div className="flex items-center gap-2 px-2.5 py-2 rounded-lg">
+          <div className="w-6 h-6 rounded-full bg-gradient-to-br from-[#7C6FF7] to-[#34d399] flex items-center justify-center text-[10px] font-bold text-white flex-shrink-0">
+            {userEmail[0]?.toUpperCase() ?? '?'}
+          </div>
+          <span className="text-[11px] text-[#9099b0] truncate flex-1 font-medium">{userEmail}</span>
+          <button
+            onClick={handleSignOut}
+            className="text-[#454a5c] hover:text-[#9099b0] transition-colors"
+            aria-label="Sign out"
+          >
+            <LogOut className="w-3.5 h-3.5" />
+          </button>
+        </div>
       </div>
     </aside>
   )
 }
 
-function NavItem({ href, icon, label, active }: {
+function SidebarItem({ href, icon, label, active }: {
   href: string; icon: React.ReactNode; label: string; active: boolean
 }) {
   return (
     <Link
       href={href}
       className={cn(
-        'flex items-center gap-2 px-2.5 py-2 rounded-lg text-[13px] transition-all duration-150',
+        'flex items-center gap-2.5 px-2.5 py-2 rounded-lg text-[13px] font-medium transition-all duration-150 relative',
         active
-          ? 'bg-[rgba(94,106,210,0.15)] text-[#a5aaee]'
-          : 'text-[#8a8f98] hover:bg-[rgba(255,255,255,0.04)] hover:text-[#c4c8d4]'
+          ? 'text-[#f0f0f5] bg-[rgba(124,111,247,0.1)]'
+          : 'text-[#9099b0] hover:text-[#c8cce0] hover:bg-[rgba(255,255,255,0.04)]'
       )}
     >
-      {icon}
-      <span className="flex-1">{label}</span>
+      {active && (
+        <span className="absolute left-0 top-1/2 -translate-y-1/2 w-[3px] h-4 bg-[#7C6FF7] rounded-r-full shadow-[0_0_8px_rgba(124,111,247,0.6)]" />
+      )}
+      <span className={cn(active ? 'text-[#7C6FF7]' : '')}>{icon}</span>
+      {label}
+    </Link>
+  )
+}
+
+function ProjectItem({ href, label, color, active }: {
+  href: string; label: string; color: string; active: boolean
+}) {
+  return (
+    <Link
+      href={href}
+      className={cn(
+        'flex items-center gap-2.5 px-2.5 py-2 rounded-lg text-[13px] font-medium transition-all duration-150 relative',
+        active
+          ? 'text-[#f0f0f5]'
+          : 'text-[#9099b0] hover:text-[#c8cce0] hover:bg-[rgba(255,255,255,0.04)]'
+      )}
+      style={active ? { background: `${color}12` } : undefined}
+    >
+      {active && (
+        <span
+          className="absolute left-0 top-1/2 -translate-y-1/2 w-[3px] h-4 rounded-r-full"
+          style={{ background: color, boxShadow: `0 0 8px ${color}80` }}
+        />
+      )}
+      <span
+        className="w-2 h-2 rounded-full flex-shrink-0 transition-all duration-150"
+        style={{ background: color, boxShadow: active ? `0 0 6px ${color}80` : 'none' }}
+      />
+      <span className="flex-1 truncate">{label}</span>
     </Link>
   )
 }

@@ -1,5 +1,6 @@
 'use client'
 import { useState } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
 import { TaskRow } from './task-row'
 import { TaskDetailPanel } from './task-detail-panel'
 import { QuickAdd } from './quick-add'
@@ -15,6 +16,17 @@ interface TaskListClientProps {
   emptyTitle: string
   emptyDescription: string
   quickAddPlaceholder?: string
+}
+
+const listVariants = {
+  hidden: {},
+  show: { transition: { staggerChildren: 0.04 } },
+}
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 8 },
+  show:   { opacity: 1, y: 0, transition: { duration: 0.3, ease: 'easeOut' as const } },
+  exit:   { opacity: 0, y: -4, transition: { duration: 0.2 } },
 }
 
 export function TaskListClient({
@@ -38,22 +50,42 @@ export function TaskListClient({
 
   return (
     <>
-      <div className="space-y-1.5">
-        {incomplete.map(t => (
-          <TaskRow key={t.id} task={t} showProject={showProject} onClick={() => setSelectedTask(t)} />
-        ))}
+      <motion.div
+        variants={listVariants}
+        initial="hidden"
+        animate="show"
+        className="space-y-0.5"
+      >
+        <AnimatePresence mode="popLayout">
+          {incomplete.map(t => (
+            <motion.div key={t.id} variants={itemVariants} exit="exit" layout>
+              <TaskRow task={t} showProject={showProject} onClick={() => setSelectedTask(t)} />
+            </motion.div>
+          ))}
+        </AnimatePresence>
+
         {incomplete.length === 0 && completed.length === 0 && (
           <EmptyState title={emptyTitle} description={emptyDescription} />
         )}
+
         {completed.length > 0 && (
-          <>
-            <p className="text-[10px] text-[#4a4f5a] uppercase tracking-[0.8px] mt-4 mb-1.5">Completed</p>
-            {completed.map(t => (
-              <TaskRow key={t.id} task={t} showProject={showProject} onClick={() => setSelectedTask(t)} />
-            ))}
-          </>
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: incomplete.length * 0.04 + 0.1 }}
+          >
+            <p className="text-[10px] text-[#454a5c] uppercase tracking-[1px] mt-5 mb-1.5 px-1 font-semibold"
+               style={{ fontFamily: 'var(--font-display)' }}>
+              Completed
+            </p>
+            <div className="space-y-0.5">
+              {completed.map(t => (
+                <TaskRow key={t.id} task={t} showProject={showProject} onClick={() => setSelectedTask(t)} />
+              ))}
+            </div>
+          </motion.div>
         )}
-      </div>
+      </motion.div>
 
       {projectId && (
         <div className="mt-3">
@@ -61,7 +93,11 @@ export function TaskListClient({
         </div>
       )}
 
-      <TaskDetailPanel task={selectedTask} onClose={() => setSelectedTask(null)} />
+      <AnimatePresence>
+        {selectedTask && (
+          <TaskDetailPanel task={selectedTask} onClose={() => setSelectedTask(null)} />
+        )}
+      </AnimatePresence>
     </>
   )
 }

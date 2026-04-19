@@ -1,29 +1,77 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700&family=Syne:wght@400;500;600;700;800&display=swap');
 @import "tailwindcss";
 
 @theme inline {
-  --font-sans: 'Inter', sans-serif;
-  --color-accent: #5E6AD2;
-  --color-accent-glow: rgba(94,106,210,0.3);
-  --color-surface: rgba(255,255,255,0.03);
-  --color-border-subtle: rgba(255,255,255,0.06);
-  --color-foreground: #ededef;
-  --color-muted: #8a8f98;
-  --color-subtle: #4a4f5a;
-  --color-destructive: #DC2626;
-  --radius-card: 10px;
+  --font-sans: 'Plus Jakarta Sans', sans-serif;
+  --font-display: 'Syne', sans-serif;
+
+  --color-accent:        #7C6FF7;
+  --color-accent-dim:    rgba(124, 111, 247, 0.12);
+  --color-accent-glow:   rgba(124, 111, 247, 0.3);
+  --color-surface-1:     rgba(255, 255, 255, 0.02);
+  --color-surface-2:     rgba(255, 255, 255, 0.04);
+  --color-surface-3:     rgba(255, 255, 255, 0.07);
+  --color-border:        rgba(255, 255, 255, 0.06);
+  --color-border-strong: rgba(255, 255, 255, 0.12);
+  --color-text-1:        #f0f0f5;
+  --color-text-2:        #9099b0;
+  --color-text-3:        #454a5c;
+  --color-success:       #34d399;
+  --color-danger:        #f87171;
+  --color-warning:       #fbbf24;
+
+  --radius-card: 12px;
   --radius-btn: 8px;
   --ease-spring: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 * { box-sizing: border-box; }
 
+html { scroll-behavior: smooth; }
+
 body {
-  font-family: 'Inter', sans-serif;
-  background: linear-gradient(160deg, #0d0d14 0%, #07070d 100%);
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  background-color: #04040a;
+  background-image:
+    radial-gradient(ellipse 900px 700px at -5% -5%, rgba(124, 111, 247, 0.09) 0%, transparent 60%),
+    radial-gradient(ellipse 600px 800px at 105% 105%, rgba(59, 130, 246, 0.05) 0%, transparent 60%);
   background-attachment: fixed;
-  color: #ededef;
+  color: #f0f0f5;
   min-height: 100dvh;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Grain texture overlay */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='250' height='250'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='250' height='250' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+  opacity: 0.025;
+  pointer-events: none;
+  z-index: 9998;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.08); border-radius: 99px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.14); }
+
+/* Date input dark theme */
+input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: invert(0.4);
+  cursor: pointer;
+}
+input[type="date"] { color-scheme: dark; }
+
+/* Page entry animation */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.animate-fade-up {
+  animation: fadeUp 0.45s var(--ease-spring) both;
 }
 
 @media (prefers-reduced-motion: reduce) {

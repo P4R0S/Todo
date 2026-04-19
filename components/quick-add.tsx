@@ -8,7 +8,7 @@ interface QuickAddProps {
   onAdd: (title: string) => Promise<void>
 }
 
-export function QuickAdd({ placeholder = 'Add a task...', onAdd }: QuickAddProps) {
+export function QuickAdd({ placeholder = 'Add a task…', onAdd }: QuickAddProps) {
   const [value, setValue] = useState('')
   const [focused, setFocused] = useState(false)
   const [loading, setLoading] = useState(false)
@@ -32,14 +32,19 @@ export function QuickAdd({ placeholder = 'Add a task...', onAdd }: QuickAddProps
     <div
       onClick={() => inputRef.current?.focus()}
       className={cn(
-        'flex items-center gap-2.5 px-3.5 py-2.5 rounded-[10px] border transition-all duration-150 cursor-text',
+        'flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl border transition-all duration-200 cursor-text',
         focused
-          ? 'bg-[rgba(94,106,210,0.05)] border-[rgba(94,106,210,0.25)]'
-          : 'bg-[rgba(255,255,255,0.02)] border-dashed border-[rgba(94,106,210,0.2)] hover:border-[rgba(94,106,210,0.35)]'
+          ? 'bg-[rgba(124,111,247,0.06)] border-[rgba(124,111,247,0.3)] shadow-[0_0_0_3px_rgba(124,111,247,0.08)]'
+          : 'bg-[rgba(255,255,255,0.02)] border-dashed border-[rgba(255,255,255,0.08)] hover:border-[rgba(124,111,247,0.2)] hover:bg-[rgba(255,255,255,0.03)]'
       )}
     >
-      <div className="w-4 h-4 rounded-[4px] border-[1.5px] border-dashed border-[rgba(94,106,210,0.4)] flex items-center justify-center flex-shrink-0">
-        <Plus className="w-2.5 h-2.5 text-[#5E6AD2]" />
+      <div className={cn(
+        'w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0 transition-all duration-200 border',
+        focused
+          ? 'border-[rgba(124,111,247,0.5)] bg-[rgba(124,111,247,0.12)]'
+          : 'border-dashed border-[rgba(255,255,255,0.12)]'
+      )}>
+        <Plus className={cn('w-2.5 h-2.5 transition-colors', focused ? 'text-[#7C6FF7]' : 'text-[#454a5c]')} />
       </div>
       <input
         ref={inputRef}
@@ -51,8 +56,11 @@ export function QuickAdd({ placeholder = 'Add a task...', onAdd }: QuickAddProps
         onKeyDown={handleKeyDown}
         disabled={loading}
         placeholder={placeholder}
-        className="flex-1 bg-transparent text-[13px] text-[#ededef] placeholder:text-[#4a4f5a] outline-none"
+        className="flex-1 bg-transparent text-[13px] font-medium text-[#f0f0f5] placeholder:text-[#454a5c] outline-none"
       />
+      {focused && value && (
+        <span className="text-[10px] text-[#454a5c] font-medium flex-shrink-0">↵ to add</span>
+      )}
     </div>
   )
 }
