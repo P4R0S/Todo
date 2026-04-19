@@ -2,6 +2,7 @@ import { redirect } from 'next/navigation'
 import { createClient } from '@/lib/supabase/server'
 import { getProjects } from '@/lib/actions/projects'
 import { Sidebar } from '@/components/sidebar'
+import { MobileNav } from '@/components/mobile-nav'
 
 export default async function AppLayout({ children }: { children: React.ReactNode }) {
   const supabase = await createClient()
@@ -18,6 +19,7 @@ export default async function AppLayout({ children }: { children: React.ReactNod
       <main className="flex-1 overflow-hidden flex flex-col pb-16 md:pb-0">
         {children}
       </main>
+      <MobileNav />
     </div>
   )
 }
