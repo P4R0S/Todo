@@ -1,9 +1,8 @@
 import { notFound } from 'next/navigation'
-import { Plus } from 'lucide-react'
-import { Button } from '@/components/ui/button'
 import { getTasksForProject } from '@/lib/actions/tasks'
 import { getProjects } from '@/lib/actions/projects'
 import { TaskListClient } from '@/components/task-list-client'
+import { AddTaskButton } from '@/components/add-task-button'
 
 export default async function ProjectPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params
@@ -18,9 +17,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ id: st
           <span className="w-3 h-3 rounded-full" style={{ background: project.color }} />
           <h1 className="text-[20px] font-bold tracking-tight">{project.name}</h1>
         </div>
-        <Button size="sm" className="shadow-[0_0_16px_rgba(94,106,210,0.3)]">
-          <Plus className="w-3 h-3 mr-1" /> Add Task
-        </Button>
+        <AddTaskButton />
       </div>
 
       <div className="flex-1 overflow-y-auto px-6 py-5">

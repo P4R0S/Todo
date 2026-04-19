@@ -43,6 +43,7 @@ export function QuickAdd({ placeholder = 'Add a task...', onAdd }: QuickAddProps
       </div>
       <input
         ref={inputRef}
+        id="quick-add-input"
         value={value}
         onChange={e => setValue(e.target.value)}
         onFocus={() => setFocused(true)}
