@@ -39,3 +39,22 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# IDE
+.idea/
+.vscode/
+
+# OS
+Thumbs.db
+*.stackdump
+
+# Supabase
+supabase/.temp/
+
+# Claude / Superpowers
+.claude/
+.superpowers/
+*.json
+!package.json
+!package-lock.json
+!tsconfig.json
