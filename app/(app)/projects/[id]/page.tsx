@@ -2,7 +2,7 @@ import { notFound } from 'next/navigation'
 import { getTasksForProject } from '@/lib/actions/tasks'
 import { getProjects } from '@/lib/actions/projects'
 import { TaskListClient } from '@/components/task-list-client'
-import { AddTaskButton } from '@/components/add-task-button'
+import { CreateTaskModal } from '@/components/create-task-modal'
 import { ProjectActionsMenu } from '@/components/project-actions-menu'
 
 export default async function ProjectPage({ params }: { params: Promise<{ id: string }> }) {
@@ -15,12 +15,15 @@ export default async function ProjectPage({ params }: { params: Promise<{ id: st
     <div className="flex flex-col h-full overflow-hidden">
       <div className="px-6 pt-5 pb-0 flex items-start justify-between flex-shrink-0">
         <div className="flex items-center gap-2.5">
-          <span className="w-3 h-3 rounded-full" style={{ background: project.color }} />
-          <h1 className="text-[20px] font-bold tracking-tight">{project.name}</h1>
+          <span className="w-3 h-3 rounded-full shadow-[0_0_8px_var(--c)]"
+                style={{ background: project.color, ['--c' as any]: `${project.color}80` }} />
+          <h1 className="text-[20px] font-bold tracking-tight" style={{ fontFamily: 'var(--font-display)' }}>
+            {project.name}
+          </h1>
         </div>
         <div className="flex items-center gap-2">
           <ProjectActionsMenu projectId={id} projectName={project.name} projectColor={project.color} />
-          <AddTaskButton />
+          <CreateTaskModal projects={projects} defaultProjectId={id} />
         </div>
       </div>
 
