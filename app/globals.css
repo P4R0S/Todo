@@ -1,26 +1,35 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: 'Inter', sans-serif;
+  --color-accent: #5E6AD2;
+  --color-accent-glow: rgba(94,106,210,0.3);
+  --color-surface: rgba(255,255,255,0.03);
+  --color-border-subtle: rgba(255,255,255,0.06);
+  --color-foreground: #ededef;
+  --color-muted: #8a8f98;
+  --color-subtle: #4a4f5a;
+  --color-destructive: #DC2626;
+  --radius-card: 10px;
+  --radius-btn: 8px;
+  --ease-spring: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+* { box-sizing: border-box; }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Inter', sans-serif;
+  background: linear-gradient(160deg, #0d0d14 0%, #07070d 100%);
+  background-attachment: fixed;
+  color: #ededef;
+  min-height: 100dvh;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
 }
