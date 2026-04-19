@@ -9,7 +9,7 @@ export function MobileNav() {
   const items = [
     { href: '/today',    icon: Zap,        label: 'Today' },
     { href: '/all',      icon: List,       label: 'All' },
-    { href: '/projects/new', icon: FolderOpen, label: 'Projects' },
+    { href: '/projects',     icon: FolderOpen, label: 'Projects' },
     { href: '/login',    icon: User,       label: 'Account' },
   ]
 
