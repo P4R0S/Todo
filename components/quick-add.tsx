@@ -1,6 +1,6 @@
 'use client'
 import { useState, useRef } from 'react'
-import { Plus } from 'lucide-react'
+import { Plus, CornerDownLeft } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
 interface QuickAddProps {
@@ -8,19 +8,24 @@ interface QuickAddProps {
   onAdd: (title: string) => Promise<void>
 }
 
-export function QuickAdd({ placeholder = 'Add a task…', onAdd }: QuickAddProps) {
+export function QuickAdd({ placeholder = 'Add a task...', onAdd }: QuickAddProps) {
   const [value, setValue] = useState('')
   const [focused, setFocused] = useState(false)
   const [loading, setLoading] = useState(false)
   const inputRef = useRef<HTMLInputElement>(null)
 
+  async function handleSubmit() {
+    if (!value.trim() || loading) return
+    setLoading(true)
+    await onAdd(value.trim())
+    setValue('')
+    setLoading(false)
+  }
+
   async function handleKeyDown(e: React.KeyboardEvent) {
-    if (e.key === 'Enter' && value.trim()) {
+    if (e.key === 'Enter') {
       e.preventDefault()
-      setLoading(true)
-      await onAdd(value.trim())
-      setValue('')
-      setLoading(false)
+      await handleSubmit()
     }
     if (e.key === 'Escape') {
       setValue('')
@@ -59,7 +64,16 @@ export function QuickAdd({ placeholder = 'Add a task…', onAdd }: QuickAddProps
         className="flex-1 bg-transparent text-[13px] font-medium text-[#f0f0f5] placeholder:text-[#454a5c] outline-none"
       />
       {focused && value && (
-        <span className="text-[10px] text-[#454a5c] font-medium flex-shrink-0">↵ to add</span>
+        <button
+          type="button"
+          onMouseDown={e => e.preventDefault()}
+          onClick={handleSubmit}
+          disabled={loading}
+          aria-label="Add task"
+          className="flex items-center justify-center w-6 h-6 rounded-lg bg-[rgba(124,111,247,0.2)] text-[#7C6FF7] flex-shrink-0 transition-all hover:bg-[rgba(124,111,247,0.35)] disabled:opacity-40"
+        >
+          <CornerDownLeft className="w-3 h-3" />
+        </button>
       )}
     </div>
   )
