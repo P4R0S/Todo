@@ -1,9 +1,10 @@
 'use client'
 import { useState, useEffect, useRef } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion, AnimatePresence, type PanInfo } from 'framer-motion'
 import { X, Plus } from 'lucide-react'
 import { createTask } from '@/lib/actions/tasks'
 import { cn } from '@/lib/utils'
+import { useIsMobile } from '@/lib/hooks/use-is-mobile'
 import type { Project, Priority } from '@/lib/types'
 
 const PRIORITIES: { value: Priority; label: string; style: string }[] = [
@@ -38,6 +39,11 @@ export function CreateTaskModal({ projects, defaultProjectId, buttonLabel = 'Add
   const [notes, setNotes] = useState('')
   const [loading, setLoading] = useState(false)
   const titleRef = useRef<HTMLInputElement>(null)
+  const isMobile = useIsMobile()
+
+  function handleSheetDragEnd(_: PointerEvent, info: PanInfo) {
+    if (info.offset.y > 80) handleClose()
+  }
 
   useEffect(() => {
     if (open) setTimeout(() => titleRef.current?.focus(), 50)
@@ -105,22 +111,10 @@ export function CreateTaskModal({ projects, defaultProjectId, buttonLabel = 'Add
               onClick={handleClose}
             />
 
-            {/* Modal */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.96, y: 12 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.97, y: 6 }}
-              transition={{ type: 'spring', damping: 32, stiffness: 380, mass: 0.7 }}
-              className="fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-50 w-full max-w-[480px] px-4"
-            >
-              <div className="rounded-2xl p-[1px]"
-                   style={{ background: 'linear-gradient(135deg, rgba(124,111,247,0.3), rgba(255,255,255,0.05), rgba(94,158,247,0.15))' }}>
-                <form
-                  onSubmit={handleSubmit}
-                  className="rounded-[15px] p-5 flex flex-col gap-5"
-                  style={{ background: 'rgba(8,8,18,0.97)', backdropFilter: 'blur(40px)' }}
-                >
-                  {/* Header */}
+            {/* Form fields shared between mobile sheet and desktop modal */}
+            {(() => {
+              const formFields = (
+                <>
                   <div className="flex items-center justify-between">
                     <h2 className="text-[15px] font-bold tracking-tight text-[#f0f0f5]"
                         style={{ fontFamily: 'var(--font-display)' }}>
@@ -132,7 +126,6 @@ export function CreateTaskModal({ projects, defaultProjectId, buttonLabel = 'Add
                     </button>
                   </div>
 
-                  {/* Title */}
                   <input
                     ref={titleRef}
                     value={title}
@@ -142,17 +135,13 @@ export function CreateTaskModal({ projects, defaultProjectId, buttonLabel = 'Add
                     className="w-full bg-[rgba(255,255,255,0.03)] border border-[rgba(255,255,255,0.08)] rounded-xl px-4 py-3 text-[15px] font-semibold text-[#f0f0f5] placeholder:text-[#454a5c] outline-none focus:border-[rgba(124,111,247,0.5)] focus:bg-[rgba(124,111,247,0.04)] transition-all"
                   />
 
-                  {/* Project */}
                   {projects.length > 1 && (
                     <div>
                       <p className="text-[10px] font-bold text-[#454a5c] uppercase tracking-[1px] mb-2"
                          style={{ fontFamily: 'var(--font-display)' }}>Project</p>
                       <div className="flex flex-wrap gap-1.5">
                         {projects.map(p => (
-                          <button
-                            key={p.id}
-                            type="button"
-                            onClick={() => setProjectId(p.id)}
+                          <button key={p.id} type="button" onClick={() => setProjectId(p.id)}
                             className={cn(
                               'flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg border text-[12px] font-semibold transition-all duration-150',
                               projectId === p.id
@@ -170,16 +159,12 @@ export function CreateTaskModal({ projects, defaultProjectId, buttonLabel = 'Add
                     </div>
                   )}
 
-                  {/* Priority */}
                   <div>
                     <p className="text-[10px] font-bold text-[#454a5c] uppercase tracking-[1px] mb-2"
                        style={{ fontFamily: 'var(--font-display)' }}>Priority</p>
                     <div className="flex gap-1.5 flex-wrap">
                       {PRIORITIES.map(({ value, label, style }) => (
-                        <button
-                          key={value}
-                          type="button"
-                          onClick={() => setPriority(value)}
+                        <button key={value} type="button" onClick={() => setPriority(value)}
                           className={cn(
                             'px-3 py-1.5 rounded-lg border text-[11px] font-bold tracking-wide transition-all duration-150',
                             priority === value ? PRIORITY_ACTIVE[value] : `bg-transparent ${style} hover:bg-[rgba(255,255,255,0.03)]`
@@ -191,47 +176,32 @@ export function CreateTaskModal({ projects, defaultProjectId, buttonLabel = 'Add
                     </div>
                   </div>
 
-                  {/* Due date */}
                   <div>
                     <p className="text-[10px] font-bold text-[#454a5c] uppercase tracking-[1px] mb-2"
                        style={{ fontFamily: 'var(--font-display)' }}>Due Date <span className="normal-case tracking-normal font-medium text-[#454a5c]">(optional)</span></p>
-                    <input
-                      type="date"
-                      value={dueDate}
-                      onChange={e => setDueDate(e.target.value)}
+                    <input type="date" value={dueDate} onChange={e => setDueDate(e.target.value)}
                       className="w-full bg-[rgba(255,255,255,0.03)] border border-[rgba(255,255,255,0.08)] rounded-xl px-4 py-2.5 text-[13px] font-medium text-[#f0f0f5] outline-none focus:border-[rgba(124,111,247,0.5)] focus:bg-[rgba(124,111,247,0.04)] transition-all"
                     />
                   </div>
 
-                  {/* Notes */}
                   <div>
                     <p className="text-[10px] font-bold text-[#454a5c] uppercase tracking-[1px] mb-2"
                        style={{ fontFamily: 'var(--font-display)' }}>Notes <span className="normal-case tracking-normal font-medium text-[#454a5c]">(optional)</span></p>
-                    <textarea
-                      value={notes}
-                      onChange={e => setNotes(e.target.value)}
-                      placeholder="Any extra details…"
-                      rows={2}
+                    <textarea value={notes} onChange={e => setNotes(e.target.value)}
+                      placeholder="Any extra details..." rows={2}
                       className="w-full bg-[rgba(255,255,255,0.03)] border border-[rgba(255,255,255,0.08)] rounded-xl px-4 py-2.5 text-[13px] font-medium text-[#f0f0f5] placeholder:text-[#454a5c] outline-none focus:border-[rgba(124,111,247,0.5)] focus:bg-[rgba(124,111,247,0.04)] transition-all resize-none"
                     />
                   </div>
 
-                  {/* Actions */}
                   <div className="flex gap-2 pt-1">
-                    <button
-                      type="button"
-                      onClick={handleClose}
-                      className="flex-1 py-2.5 rounded-xl border border-[rgba(255,255,255,0.08)] bg-[rgba(255,255,255,0.03)] text-[13px] font-semibold text-[#9099b0] hover:bg-[rgba(255,255,255,0.06)] transition-all"
-                    >
+                    <button type="button" onClick={handleClose}
+                      className="flex-1 py-2.5 rounded-xl border border-[rgba(255,255,255,0.08)] bg-[rgba(255,255,255,0.03)] text-[13px] font-semibold text-[#9099b0] hover:bg-[rgba(255,255,255,0.06)] transition-all">
                       Cancel
                     </button>
-                    <button
-                      type="submit"
-                      disabled={loading || !title.trim() || !projectId}
+                    <button type="submit" disabled={loading || !title.trim() || !projectId}
                       className="flex-1 py-2.5 rounded-xl text-[13px] font-bold text-white transition-all disabled:opacity-40 hover:opacity-90"
-                      style={{ background: 'linear-gradient(135deg, #7C6FF7 0%, #5E9EF7 100%)', boxShadow: '0 0 20px rgba(124,111,247,0.3)' }}
-                    >
-                      {loading ? 'Creating…' : 'Create Task'}
+                      style={{ background: 'linear-gradient(135deg, #7C6FF7 0%, #5E9EF7 100%)', boxShadow: '0 0 20px rgba(124,111,247,0.3)' }}>
+                      {loading ? 'Creating...' : 'Create Task'}
                     </button>
                   </div>
 
@@ -240,9 +210,47 @@ export function CreateTaskModal({ projects, defaultProjectId, buttonLabel = 'Add
                       Create a project first to add tasks.
                     </p>
                   )}
-                </form>
-              </div>
-            </motion.div>
+                </>
+              )
+
+              return isMobile ? (
+                <motion.div
+                  initial={{ y: '100%' }}
+                  animate={{ y: 0 }}
+                  exit={{ y: '100%' }}
+                  drag="y"
+                  dragConstraints={{ top: 0 }}
+                  dragElastic={{ top: 0, bottom: 0.25 }}
+                  onDragEnd={handleSheetDragEnd}
+                  transition={{ type: 'spring', damping: 32, stiffness: 380, mass: 0.7 }}
+                  className="fixed bottom-0 left-0 right-0 z-50 rounded-t-[20px] border-t border-[rgba(255,255,255,0.08)]"
+                  style={{ background: 'rgba(8,8,18,0.98)', backdropFilter: 'blur(40px)' }}
+                >
+                  <div className="flex justify-center pt-3 pb-1">
+                    <div className="w-8 h-[3px] rounded-full bg-[rgba(255,255,255,0.2)]" />
+                  </div>
+                  <form onSubmit={handleSubmit} className="p-5 flex flex-col gap-5 pb-8">
+                    {formFields}
+                  </form>
+                </motion.div>
+              ) : (
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.96, y: 12 }}
+                  animate={{ opacity: 1, scale: 1, y: 0 }}
+                  exit={{ opacity: 0, scale: 0.97, y: 6 }}
+                  transition={{ type: 'spring', damping: 32, stiffness: 380, mass: 0.7 }}
+                  className="fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-50 w-full max-w-[480px] px-4"
+                >
+                  <div className="rounded-2xl p-[1px]"
+                       style={{ background: 'linear-gradient(135deg, rgba(124,111,247,0.3), rgba(255,255,255,0.05), rgba(94,158,247,0.15))' }}>
+                    <form onSubmit={handleSubmit} className="rounded-[15px] p-5 flex flex-col gap-5"
+                          style={{ background: 'rgba(8,8,18,0.97)', backdropFilter: 'blur(40px)' }}>
+                      {formFields}
+                    </form>
+                  </div>
+                </motion.div>
+              )
+            })()}
           </>
         )}
       </AnimatePresence>
