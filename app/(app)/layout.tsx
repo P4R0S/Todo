@@ -19,7 +19,7 @@ export default async function AppLayout({ children }: { children: React.ReactNod
       <main className="flex-1 overflow-hidden flex flex-col pb-16 md:pb-0">
         {children}
       </main>
-      <MobileNav />
+      <MobileNav projects={projects} userEmail={user.email ?? ''} />
     </div>
   )
 }

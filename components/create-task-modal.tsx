@@ -26,9 +26,10 @@ interface CreateTaskModalProps {
   projects: Project[]
   defaultProjectId?: string
   buttonLabel?: string
+  trigger?: React.ReactNode
 }
 
-export function CreateTaskModal({ projects, defaultProjectId, buttonLabel = 'Add Task' }: CreateTaskModalProps) {
+export function CreateTaskModal({ projects, defaultProjectId, buttonLabel = 'Add Task', trigger }: CreateTaskModalProps) {
   const [open, setOpen] = useState(false)
   const [title, setTitle] = useState('')
   const [projectId, setProjectId] = useState(defaultProjectId ?? projects[0]?.id ?? '')
@@ -77,15 +78,19 @@ export function CreateTaskModal({ projects, defaultProjectId, buttonLabel = 'Add
 
   return (
     <>
-      <button
-        type="button"
-        onClick={() => setOpen(true)}
-        className="flex items-center gap-1.5 h-8 px-3 rounded-[10px] text-[12px] font-bold text-white transition-all duration-150 hover:opacity-90 hover:shadow-[0_0_28px_rgba(124,111,247,0.5)]"
-        style={{ background: 'linear-gradient(135deg, #7C6FF7 0%, #5E9EF7 100%)', boxShadow: '0 0 20px rgba(124,111,247,0.3)' }}
-      >
-        <Plus className="w-3.5 h-3.5" />
-        {buttonLabel}
-      </button>
+      {trigger ? (
+        <div onClick={() => setOpen(true)} style={{ display: 'contents' }}>{trigger}</div>
+      ) : (
+        <button
+          type="button"
+          onClick={() => setOpen(true)}
+          className="flex items-center gap-1.5 h-8 px-3 rounded-[10px] text-[12px] font-bold text-white transition-all duration-150 hover:opacity-90 hover:shadow-[0_0_28px_rgba(124,111,247,0.5)]"
+          style={{ background: 'linear-gradient(135deg, #7C6FF7 0%, #5E9EF7 100%)', boxShadow: '0 0 20px rgba(124,111,247,0.3)' }}
+        >
+          <Plus className="w-3.5 h-3.5" />
+          {buttonLabel}
+        </button>
+      )}
 
       <AnimatePresence>
         {open && (
