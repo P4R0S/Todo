@@ -1,9 +1,10 @@
 'use client'
 import Link from 'next/link'
 import { usePathname, useRouter } from 'next/navigation'
-import { Zap, List, Plus, LogOut, Focus } from 'lucide-react'
+import { Zap, List, Plus, LogOut, Focus, Search } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { createClient } from '@/lib/supabase/client'
+import { useSearch } from '@/lib/contexts/search-context'
 import type { Project } from '@/lib/types'
 
 interface SidebarProps {
@@ -15,6 +16,7 @@ export function Sidebar({ projects, userEmail }: SidebarProps) {
   const pathname = usePathname()
   const router = useRouter()
   const supabase = createClient()
+  const { openSearch } = useSearch()
 
   async function handleSignOut() {
     await supabase.auth.signOut()
@@ -31,6 +33,21 @@ export function Sidebar({ projects, userEmail }: SidebarProps) {
         </div>
         <span className="text-[15px] font-bold tracking-tight" style={{ fontFamily: 'var(--font-display)' }}>Focus</span>
       </div>
+
+      {/* Search button */}
+      <button
+        onClick={openSearch}
+        className="flex items-center gap-2.5 px-2.5 py-2 rounded-lg w-full text-[13px] font-medium text-[#9099b0] hover:text-[#c8cce0] hover:bg-[rgba(255,255,255,0.04)] transition-all duration-150 mb-1 group"
+      >
+        <Search className="w-3.5 h-3.5 text-[#454a5c] group-hover:text-[#9099b0] transition-colors" />
+        <span className="flex-1 text-left">Search</span>
+        <span
+          className="text-[9px] font-bold text-[#454a5c] px-1.5 py-0.5 rounded border border-[rgba(255,255,255,0.08)]"
+          style={{ fontFamily: 'var(--font-display)' }}
+        >
+          ⌘K
+        </span>
+      </button>
 
       {/* Main nav */}
       <div className="space-y-0.5">

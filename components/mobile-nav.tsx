@@ -1,9 +1,10 @@
 'use client'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { Zap, List, Monitor, BarChart2, Plus } from 'lucide-react'
+import { Zap, List, Monitor, BarChart2, Plus, Search } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { CreateTaskModal } from './create-task-modal'
+import { useSearch } from '@/lib/contexts/search-context'
 import type { Project } from '@/lib/types'
 
 interface MobileNavProps {
@@ -20,6 +21,7 @@ const NAV_ITEMS = [
 
 export function MobileNav({ projects, userEmail: _ }: MobileNavProps) {
   const pathname = usePathname()
+  const { openSearch } = useSearch()
 
   const fab = (
     <button
@@ -48,7 +50,7 @@ export function MobileNav({ projects, userEmail: _ }: MobileNavProps) {
         style={{ background: 'rgba(4,4,10,0.95)', backdropFilter: 'blur(20px)' }}
       >
         <div className="flex items-center justify-around h-[72px]">
-          {NAV_ITEMS.map(({ href, icon: Icon, label }) => {
+          {NAV_ITEMS.slice(0, 2).map(({ href, icon: Icon, label }) => {
             const active = pathname === href || pathname.startsWith(href + '/')
             return (
               <Link
@@ -59,19 +61,37 @@ export function MobileNav({ projects, userEmail: _ }: MobileNavProps) {
                   active ? 'text-[#7C6FF7]' : 'text-[#454a5c]'
                 )}
               >
-                <Icon
-                  className={cn('w-5 h-5 transition-all duration-200', active ? 'opacity-100' : 'opacity-60')}
-                  strokeWidth={active ? 2.5 : 1.8}
-                />
-                <span
-                  className="text-[10px] font-bold"
-                  style={{ fontFamily: 'var(--font-display)', letterSpacing: '0.02em' }}
-                >
-                  {label}
-                </span>
-                {active && (
-                  <div className="w-1 h-1 rounded-full bg-[#7C6FF7]" style={{ boxShadow: '0 0 6px #7C6FF7' }} />
+                <Icon className={cn('w-5 h-5 transition-all duration-200', active ? 'opacity-100' : 'opacity-60')} strokeWidth={active ? 2.5 : 1.8} />
+                <span className="text-[10px] font-bold" style={{ fontFamily: 'var(--font-display)', letterSpacing: '0.02em' }}>{label}</span>
+                {active && <div className="w-1 h-1 rounded-full bg-[#7C6FF7]" style={{ boxShadow: '0 0 6px #7C6FF7' }} />}
+              </Link>
+            )
+          })}
+
+          {/* Search button */}
+          <button
+            onClick={openSearch}
+            className="flex-1 flex flex-col items-center gap-[3px] py-2 text-[#454a5c] transition-colors duration-200 active:text-[#7C6FF7]"
+          >
+            <Search className="w-5 h-5 opacity-60" strokeWidth={1.8} />
+            <span className="text-[10px] font-bold" style={{ fontFamily: 'var(--font-display)', letterSpacing: '0.02em' }}>Search</span>
+            <div className="w-1 h-1 opacity-0" />
+          </button>
+
+          {NAV_ITEMS.slice(2).map(({ href, icon: Icon, label }) => {
+            const active = pathname === href || pathname.startsWith(href + '/')
+            return (
+              <Link
+                key={href}
+                href={href}
+                className={cn(
+                  'flex-1 flex flex-col items-center gap-[3px] py-2 transition-colors duration-200',
+                  active ? 'text-[#7C6FF7]' : 'text-[#454a5c]'
                 )}
+              >
+                <Icon className={cn('w-5 h-5 transition-all duration-200', active ? 'opacity-100' : 'opacity-60')} strokeWidth={active ? 2.5 : 1.8} />
+                <span className="text-[10px] font-bold" style={{ fontFamily: 'var(--font-display)', letterSpacing: '0.02em' }}>{label}</span>
+                {active && <div className="w-1 h-1 rounded-full bg-[#7C6FF7]" style={{ boxShadow: '0 0 6px #7C6FF7' }} />}
               </Link>
             )
           })}
