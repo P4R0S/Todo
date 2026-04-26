@@ -3,6 +3,19 @@ import { revalidatePath } from 'next/cache'
 import { createClient } from '@/lib/supabase/server'
 import type { Task, TaskWithSubtasks, Priority } from '@/lib/types'
 
+export async function getCompletedTodayTasks(today: string): Promise<(TaskWithSubtasks & { project: { name: string; color: string } })[]> {
+  const supabase = await createClient()
+  const { data, error } = await supabase
+    .from('tasks')
+    .select('*, subtasks(*), project:projects(name, color)')
+    .is('deleted_at', null)
+    .eq('completed', true)
+    .gte('completed_at', `${today}T00:00:00`)
+    .order('completed_at', { ascending: false })
+  if (error) throw error
+  return (data ?? []) as any
+}
+
 export async function getTasksForProject(projectId: string): Promise<TaskWithSubtasks[]> {
   const supabase = await createClient()
   const { data, error } = await supabase

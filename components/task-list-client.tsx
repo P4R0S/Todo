@@ -16,6 +16,7 @@ interface TaskListClientProps {
   emptyTitle: string
   emptyDescription: string
   quickAddPlaceholder?: string
+  showToDoHeader?: boolean
 }
 
 const listVariants = {
@@ -31,7 +32,7 @@ const itemVariants = {
 
 export function TaskListClient({
   tasks, projectId, showProject = false,
-  emptyTitle, emptyDescription, quickAddPlaceholder,
+  emptyTitle, emptyDescription, quickAddPlaceholder, showToDoHeader = false,
 }: TaskListClientProps) {
   const [selectedTask, setSelectedTask] = useState<TaskWithSubtasks | null>(null)
 
@@ -56,6 +57,12 @@ export function TaskListClient({
         animate="show"
         className="space-y-0.5"
       >
+        {showToDoHeader && incomplete.length > 0 && (
+          <div className="flex items-center gap-2 py-[18px] pb-2">
+            <span className="text-[11px] font-bold text-[#454a5c] uppercase" style={{ fontFamily: 'var(--font-display)', letterSpacing: '0.08em' }}>To do</span>
+            <span className="text-[10px] font-bold text-[#454a5c] px-1.5 py-0.5 rounded-full" style={{ background: 'rgba(255,255,255,0.04)' }}>{incomplete.length}</span>
+          </div>
+        )}
         <AnimatePresence mode="popLayout">
           {incomplete.map(t => (
             <motion.div key={t.id} variants={itemVariants} exit="exit" layout>
@@ -74,10 +81,10 @@ export function TaskListClient({
             animate={{ opacity: 1 }}
             transition={{ delay: incomplete.length * 0.04 + 0.1 }}
           >
-            <p className="text-[10px] text-[#454a5c] uppercase tracking-[1px] mt-5 mb-1.5 px-1 font-semibold"
-               style={{ fontFamily: 'var(--font-display)' }}>
-              Completed
-            </p>
+            <div className="flex items-center gap-2 mt-5 mb-1.5 px-1">
+              <span className="text-[11px] font-bold text-[#454a5c] uppercase" style={{ fontFamily: 'var(--font-display)', letterSpacing: '0.08em' }}>Completed</span>
+              <span className="text-[10px] font-bold text-[#454a5c] px-1.5 py-0.5 rounded-full" style={{ background: 'rgba(255,255,255,0.04)' }}>{completed.length}</span>
+            </div>
             <div className="space-y-0.5">
               {completed.map(t => (
                 <TaskRow key={t.id} task={t} showProject={showProject} onClick={() => setSelectedTask(t)} />
