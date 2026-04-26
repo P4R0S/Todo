@@ -17,8 +17,8 @@ const syne = Syne({
 })
 
 export const metadata: Metadata = {
-  title: 'Focus — Task Manager',
-  description: 'Your personal focus-driven task manager',
+  title: 'Tudu — Task Manager',
+  description: 'Your personal task manager',
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

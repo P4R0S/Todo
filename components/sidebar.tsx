@@ -31,7 +31,7 @@ export function Sidebar({ projects, userEmail }: SidebarProps) {
         <div className="w-7 h-7 rounded-lg bg-gradient-to-br from-[#7C6FF7] to-[#5E9EF7] flex items-center justify-center flex-shrink-0 shadow-[0_0_16px_rgba(124,111,247,0.4)]">
           <Focus className="w-3.5 h-3.5 text-white" strokeWidth={2} />
         </div>
-        <span className="text-[15px] font-bold tracking-tight" style={{ fontFamily: 'var(--font-display)' }}>Focus</span>
+        <span className="text-[15px] font-bold tracking-tight" style={{ fontFamily: 'var(--font-display)' }}>Tudu</span>
       </div>
 
       {/* Search button */}

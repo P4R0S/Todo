@@ -55,7 +55,7 @@ export function LoginForm() {
           </div>
           <h1 className="text-[26px] font-bold tracking-tight text-[#f0f0f5]"
               style={{ fontFamily: 'var(--font-display)' }}>
-            Focus
+            Tudu
           </h1>
           <p className="text-[13px] text-[#9099b0] mt-1 font-medium">
             {mode === 'signin' ? 'Welcome back' : 'Create your account'}
