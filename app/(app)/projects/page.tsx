@@ -24,7 +24,7 @@ export default async function ProjectsPage() {
         </div>
         <Link
           href="/projects/new"
-          className="flex items-center gap-1.5 px-3 py-2 rounded-[10px] text-[12px] font-semibold text-[#7C6FF7] border border-[rgba(124,111,247,0.25)] bg-[rgba(124,111,247,0.08)] hover:bg-[rgba(124,111,247,0.14)] transition-colors"
+          className="flex items-center gap-1.5 px-3 py-2 rounded-[10px] text-[12px] font-semibold text-[#FF3B5C] border border-[rgba(255,59,92,0.25)] bg-[rgba(255,59,92,0.08)] hover:bg-[rgba(255,59,92,0.14)] transition-colors"
         >
           <Plus className="w-3.5 h-3.5" strokeWidth={2.5} />
           New

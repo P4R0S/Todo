@@ -41,7 +41,7 @@ function HighlightedText({ text, query }: { text: string; query: string }) {
           <mark
             key={i}
             className="rounded-sm"
-            style={{ background: 'rgba(124,111,247,0.28)', color: '#a89cf9', fontStyle: 'normal' }}
+            style={{ background: 'rgba(255,59,92,0.28)', color: '#a89cf9', fontStyle: 'normal' }}
           >
             {part}
           </mark>
@@ -158,7 +158,7 @@ export function SearchModal({ tasks }: SearchModalProps) {
                   background: 'rgba(8,8,18,0.98)',
                   backdropFilter: 'blur(40px)',
                   border: '1px solid rgba(255,255,255,0.1)',
-                  boxShadow: '0 0 60px rgba(0,0,0,0.6), 0 0 30px rgba(124,111,247,0.12)',
+                  boxShadow: '0 0 60px rgba(0,0,0,0.6), 0 0 30px rgba(255,59,92,0.12)',
                 }}
               >
                 {/* Input row */}
@@ -198,9 +198,9 @@ export function SearchModal({ tasks }: SearchModalProps) {
                     <div className="flex flex-col items-center justify-center py-12 px-4">
                       <div
                         className="w-12 h-12 rounded-2xl flex items-center justify-center mb-3"
-                        style={{ background: 'rgba(124,111,247,0.08)', border: '1px solid rgba(124,111,247,0.15)' }}
+                        style={{ background: 'rgba(255,59,92,0.08)', border: '1px solid rgba(255,59,92,0.15)' }}
                       >
-                        <Search className="w-5 h-5 text-[#7C6FF7]" strokeWidth={1.5} />
+                        <Search className="w-5 h-5 text-[#FF3B5C]" strokeWidth={1.5} />
                       </div>
                       <p className="text-[13px] font-semibold text-[#9099b0] text-center">
                         Search across all your tasks
@@ -234,8 +234,8 @@ export function SearchModal({ tasks }: SearchModalProps) {
                             onMouseEnter={() => setSelectedIdx(idx)}
                             className="flex items-center gap-3 px-4 py-3 cursor-pointer transition-colors duration-100"
                             style={{
-                              background: isSelected ? 'rgba(124,111,247,0.1)' : 'transparent',
-                              borderLeft: isSelected ? '2px solid #7C6FF7' : '2px solid transparent',
+                              background: isSelected ? 'rgba(255,59,92,0.1)' : 'transparent',
+                              borderLeft: isSelected ? '2px solid #FF3B5C' : '2px solid transparent',
                             }}
                           >
                             {/* Project color dot */}
@@ -293,7 +293,7 @@ export function SearchModal({ tasks }: SearchModalProps) {
                                 <span className="text-[10px] text-[#454a5c]">Done</span>
                               )}
                               {isSelected && (
-                                <CornerDownLeft className="w-3.5 h-3.5 text-[#7C6FF7] ml-1" strokeWidth={2} />
+                                <CornerDownLeft className="w-3.5 h-3.5 text-[#FF3B5C] ml-1" strokeWidth={2} />
                               )}
                             </div>
                           </div>

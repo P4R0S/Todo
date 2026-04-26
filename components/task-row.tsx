@@ -146,8 +146,8 @@ export function TaskRow({ task, showProject = false, onClick }: TaskRowProps) {
               className="w-[22px] h-[22px] rounded-full flex items-center justify-center flex-shrink-0 transition-all duration-200"
               style={{
                 border: task.completed ? 'none' : '1.5px solid rgba(255,255,255,0.22)',
-                background: task.completed ? '#7C6FF7' : 'transparent',
-                boxShadow: task.completed ? '0 0 12px rgba(124,111,247,0.5)' : 'none',
+                background: task.completed ? '#FF3B5C' : 'transparent',
+                boxShadow: task.completed ? '0 0 12px rgba(255,59,92,0.5)' : 'none',
               }}
             >
               <AnimatePresence>

@@ -7,14 +7,14 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 
 const COLORS = [
-  '#7C6FF7', '#34d399', '#f59e0b', '#f87171',
+  '#FF3B5C', '#34d399', '#f59e0b', '#f87171',
   '#38bdf8', '#a78bfa', '#fb7185', '#4ade80',
 ]
 
 export default function NewProjectPage() {
   const router = useRouter()
   const [name, setName] = useState('')
-  const [color, setColor] = useState('#7C6FF7')
+  const [color, setColor] = useState('#FF3B5C')
   const [loading, setLoading] = useState(false)
 
   async function handleSubmit(e: React.FormEvent) {
@@ -34,7 +34,7 @@ export default function NewProjectPage() {
         className="w-full max-w-sm"
       >
         <div className="rounded-2xl p-[1px]"
-             style={{ background: 'linear-gradient(135deg, rgba(124,111,247,0.2), rgba(255,255,255,0.04), rgba(94,158,247,0.1))' }}>
+             style={{ background: 'linear-gradient(135deg, rgba(255,59,92,0.2), rgba(255,255,255,0.04), rgba(255,15,61,0.1))' }}>
           <div className="rounded-[15px] p-6"
                style={{ background: 'rgba(8,8,18,0.95)', backdropFilter: 'blur(40px)' }}>
             <h1 className="text-[18px] font-bold mb-1 tracking-tight"

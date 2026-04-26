@@ -45,7 +45,7 @@ export default async function TodayPage() {
               {done} of {total} complete
             </span>
             <span
-              className="text-[11px] font-bold text-[#7C6FF7]"
+              className="text-[11px] font-bold text-[#FF3B5C]"
               style={{ fontFamily: 'var(--font-display)' }}
             >
               {pct}%
@@ -56,8 +56,8 @@ export default async function TodayPage() {
               className="h-full rounded-full"
               style={{
                 width: `${pct}%`,
-                background: 'linear-gradient(90deg, #7C6FF7, #5E9EF7)',
-                boxShadow: '0 0 8px rgba(124,111,247,0.5)',
+                background: 'linear-gradient(90deg, #FF3B5C, #FF0F3D)',
+                boxShadow: '0 0 8px rgba(255,59,92,0.5)',
                 transition: 'width 0.6s cubic-bezier(0.16,1,0.3,1)',
               }}
             />
@@ -70,9 +70,9 @@ export default async function TodayPage() {
           <div className="flex flex-col items-center justify-center py-16 text-center gap-3">
             <div
               className="w-[52px] h-[52px] rounded-2xl flex items-center justify-center"
-              style={{ background: 'rgba(124,111,247,0.08)', border: '1px solid rgba(124,111,247,0.15)' }}
+              style={{ background: 'rgba(255,59,92,0.08)', border: '1px solid rgba(255,59,92,0.15)' }}
             >
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#7C6FF7" strokeWidth="1.5">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#FF3B5C" strokeWidth="1.5">
                 <path d="M9 11l3 3L22 4"/>
                 <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/>
               </svg>

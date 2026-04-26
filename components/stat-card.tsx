@@ -11,7 +11,7 @@ export function StatCard({ label, value, sub, subColor, progress }: StatCardProp
     <div className="flex-1 rounded-xl p-4 border border-[rgba(255,255,255,0.06)] bg-[rgba(255,255,255,0.02)] hover:bg-[rgba(255,255,255,0.035)] transition-colors duration-200 relative overflow-hidden">
       {/* Subtle gradient accent in corner */}
       <div className="absolute top-0 right-0 w-16 h-16 rounded-bl-full opacity-30"
-           style={{ background: 'radial-gradient(circle, rgba(124,111,247,0.15) 0%, transparent 70%)' }} />
+           style={{ background: 'radial-gradient(circle, rgba(255,59,92,0.15) 0%, transparent 70%)' }} />
 
       <p className="text-[10px] font-semibold text-[#454a5c] uppercase tracking-[1px] mb-2"
          style={{ fontFamily: 'var(--font-display)' }}>
@@ -22,7 +22,7 @@ export function StatCard({ label, value, sub, subColor, progress }: StatCardProp
         {value}
       </p>
       {sub && (
-        <p className="text-[11px] font-semibold mt-1" style={{ color: subColor ?? '#7C6FF7' }}>
+        <p className="text-[11px] font-semibold mt-1" style={{ color: subColor ?? '#FF3B5C' }}>
           {sub}
         </p>
       )}
@@ -32,8 +32,8 @@ export function StatCard({ label, value, sub, subColor, progress }: StatCardProp
             className="h-full rounded-full transition-all duration-700"
             style={{
               width: `${Math.min(100, Math.max(0, progress))}%`,
-              background: 'linear-gradient(90deg, #7C6FF7, #5E9EF7)',
-              boxShadow: '0 0 6px rgba(124,111,247,0.5)',
+              background: 'linear-gradient(90deg, #FF3B5C, #FF0F3D)',
+              boxShadow: '0 0 6px rgba(255,59,92,0.5)',
             }}
           />
         </div>

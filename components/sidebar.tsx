@@ -28,7 +28,7 @@ export function Sidebar({ projects, userEmail }: SidebarProps) {
 
       {/* Logo */}
       <div className="flex items-center gap-2.5 px-2.5 mb-6">
-        <div className="w-7 h-7 rounded-lg bg-gradient-to-br from-[#7C6FF7] to-[#5E9EF7] flex items-center justify-center flex-shrink-0 shadow-[0_0_16px_rgba(124,111,247,0.4)]">
+        <div className="w-7 h-7 rounded-lg bg-gradient-to-br from-[#FF3B5C] to-[#FF0F3D] flex items-center justify-center flex-shrink-0 shadow-[0_0_16px_rgba(255,59,92,0.4)]">
           <Focus className="w-3.5 h-3.5 text-white" strokeWidth={2} />
         </div>
         <span className="text-[15px] font-bold tracking-tight" style={{ fontFamily: 'var(--font-display)' }}>Tudu</span>
@@ -84,7 +84,7 @@ export function Sidebar({ projects, userEmail }: SidebarProps) {
       {/* User */}
       <div className="mt-auto">
         <div className="flex items-center gap-2 px-2.5 py-2 rounded-lg">
-          <div className="w-6 h-6 rounded-full bg-gradient-to-br from-[#7C6FF7] to-[#34d399] flex items-center justify-center text-[10px] font-bold text-white flex-shrink-0">
+          <div className="w-6 h-6 rounded-full bg-gradient-to-br from-[#FF3B5C] to-[#34d399] flex items-center justify-center text-[10px] font-bold text-white flex-shrink-0">
             {userEmail[0]?.toUpperCase() ?? '?'}
           </div>
           <span className="text-[11px] text-[#9099b0] truncate flex-1 font-medium">{userEmail}</span>
@@ -110,14 +110,14 @@ function SidebarItem({ href, icon, label, active }: {
       className={cn(
         'flex items-center gap-2.5 px-2.5 py-2 rounded-lg text-[13px] font-medium transition-all duration-150 relative',
         active
-          ? 'text-[#f0f0f5] bg-[rgba(124,111,247,0.1)]'
+          ? 'text-[#f0f0f5] bg-[rgba(255,59,92,0.1)]'
           : 'text-[#9099b0] hover:text-[#c8cce0] hover:bg-[rgba(255,255,255,0.04)]'
       )}
     >
       {active && (
-        <span className="absolute left-0 top-1/2 -translate-y-1/2 w-[3px] h-4 bg-[#7C6FF7] rounded-r-full shadow-[0_0_8px_rgba(124,111,247,0.6)]" />
+        <span className="absolute left-0 top-1/2 -translate-y-1/2 w-[3px] h-4 bg-[#FF3B5C] rounded-r-full shadow-[0_0_8px_rgba(255,59,92,0.6)]" />
       )}
-      <span className={cn(active ? 'text-[#7C6FF7]' : '')}>{icon}</span>
+      <span className={cn(active ? 'text-[#FF3B5C]' : '')}>{icon}</span>
       {label}
     </Link>
   )

@@ -90,8 +90,8 @@ export function CreateTaskModal({ projects, defaultProjectId, buttonLabel = 'Add
         <button
           type="button"
           onClick={() => setOpen(true)}
-          className="flex items-center gap-1.5 h-8 px-3 rounded-[10px] text-[12px] font-bold text-white transition-all duration-150 hover:opacity-90 hover:shadow-[0_0_28px_rgba(124,111,247,0.5)]"
-          style={{ background: 'linear-gradient(135deg, #7C6FF7 0%, #5E9EF7 100%)', boxShadow: '0 0 20px rgba(124,111,247,0.3)' }}
+          className="flex items-center gap-1.5 h-8 px-3 rounded-[10px] text-[12px] font-bold text-white transition-all duration-150 hover:opacity-90 hover:shadow-[0_0_28px_rgba(255,59,92,0.5)]"
+          style={{ background: 'linear-gradient(135deg, #FF3B5C 0%, #FF0F3D 100%)', boxShadow: '0 0 20px rgba(255,59,92,0.3)' }}
         >
           <Plus className="w-3.5 h-3.5" />
           {buttonLabel}
@@ -132,7 +132,7 @@ export function CreateTaskModal({ projects, defaultProjectId, buttonLabel = 'Add
                     onChange={e => setTitle(e.target.value)}
                     placeholder="What needs to be done?"
                     required
-                    className="w-full bg-[rgba(255,255,255,0.03)] border border-[rgba(255,255,255,0.08)] rounded-xl px-4 py-3 text-[15px] font-semibold text-[#f0f0f5] placeholder:text-[#454a5c] outline-none focus:border-[rgba(124,111,247,0.5)] focus:bg-[rgba(124,111,247,0.04)] transition-all"
+                    className="w-full bg-[rgba(255,255,255,0.03)] border border-[rgba(255,255,255,0.08)] rounded-xl px-4 py-3 text-[15px] font-semibold text-[#f0f0f5] placeholder:text-[#454a5c] outline-none focus:border-[rgba(255,59,92,0.5)] focus:bg-[rgba(255,59,92,0.04)] transition-all"
                   />
 
                   {projects.length > 1 && (
@@ -180,7 +180,7 @@ export function CreateTaskModal({ projects, defaultProjectId, buttonLabel = 'Add
                     <p className="text-[10px] font-bold text-[#454a5c] uppercase tracking-[1px] mb-2"
                        style={{ fontFamily: 'var(--font-display)' }}>Due Date <span className="normal-case tracking-normal font-medium text-[#454a5c]">(optional)</span></p>
                     <input type="date" value={dueDate} onChange={e => setDueDate(e.target.value)}
-                      className="w-full bg-[rgba(255,255,255,0.03)] border border-[rgba(255,255,255,0.08)] rounded-xl px-4 py-2.5 text-[13px] font-medium text-[#f0f0f5] outline-none focus:border-[rgba(124,111,247,0.5)] focus:bg-[rgba(124,111,247,0.04)] transition-all"
+                      className="w-full bg-[rgba(255,255,255,0.03)] border border-[rgba(255,255,255,0.08)] rounded-xl px-4 py-2.5 text-[13px] font-medium text-[#f0f0f5] outline-none focus:border-[rgba(255,59,92,0.5)] focus:bg-[rgba(255,59,92,0.04)] transition-all"
                     />
                   </div>
 
@@ -189,7 +189,7 @@ export function CreateTaskModal({ projects, defaultProjectId, buttonLabel = 'Add
                        style={{ fontFamily: 'var(--font-display)' }}>Notes <span className="normal-case tracking-normal font-medium text-[#454a5c]">(optional)</span></p>
                     <textarea value={notes} onChange={e => setNotes(e.target.value)}
                       placeholder="Any extra details..." rows={2}
-                      className="w-full bg-[rgba(255,255,255,0.03)] border border-[rgba(255,255,255,0.08)] rounded-xl px-4 py-2.5 text-[13px] font-medium text-[#f0f0f5] placeholder:text-[#454a5c] outline-none focus:border-[rgba(124,111,247,0.5)] focus:bg-[rgba(124,111,247,0.04)] transition-all resize-none"
+                      className="w-full bg-[rgba(255,255,255,0.03)] border border-[rgba(255,255,255,0.08)] rounded-xl px-4 py-2.5 text-[13px] font-medium text-[#f0f0f5] placeholder:text-[#454a5c] outline-none focus:border-[rgba(255,59,92,0.5)] focus:bg-[rgba(255,59,92,0.04)] transition-all resize-none"
                     />
                   </div>
 
@@ -200,7 +200,7 @@ export function CreateTaskModal({ projects, defaultProjectId, buttonLabel = 'Add
                     </button>
                     <button type="submit" disabled={loading || !title.trim() || !projectId}
                       className="flex-1 py-2.5 rounded-xl text-[13px] font-bold text-white transition-all disabled:opacity-40 hover:opacity-90"
-                      style={{ background: 'linear-gradient(135deg, #7C6FF7 0%, #5E9EF7 100%)', boxShadow: '0 0 20px rgba(124,111,247,0.3)' }}>
+                      style={{ background: 'linear-gradient(135deg, #FF3B5C 0%, #FF0F3D 100%)', boxShadow: '0 0 20px rgba(255,59,92,0.3)' }}>
                       {loading ? 'Creating...' : 'Create Task'}
                     </button>
                   </div>
@@ -242,7 +242,7 @@ export function CreateTaskModal({ projects, defaultProjectId, buttonLabel = 'Add
                   className="fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-50 w-full max-w-[480px] px-4"
                 >
                   <div className="rounded-2xl p-[1px]"
-                       style={{ background: 'linear-gradient(135deg, rgba(124,111,247,0.3), rgba(255,255,255,0.05), rgba(94,158,247,0.15))' }}>
+                       style={{ background: 'linear-gradient(135deg, rgba(255,59,92,0.3), rgba(255,255,255,0.05), rgba(255,15,61,0.15))' }}>
                     <form onSubmit={handleSubmit} className="rounded-[15px] p-5 flex flex-col gap-5"
                           style={{ background: 'rgba(8,8,18,0.97)', backdropFilter: 'blur(40px)' }}>
                       {formFields}

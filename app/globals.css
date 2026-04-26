@@ -5,9 +5,10 @@
   --font-sans: 'Plus Jakarta Sans', sans-serif;
   --font-display: 'Syne', sans-serif;
 
-  --color-accent:        #7C6FF7;
-  --color-accent-dim:    rgba(124, 111, 247, 0.12);
-  --color-accent-glow:   rgba(124, 111, 247, 0.3);
+  --color-accent:        #FF3B5C;
+  --color-accent-secondary: #FF0F3D;
+  --color-accent-dim:    rgba(255, 59, 92, 0.12);
+  --color-accent-glow:   rgba(255, 59, 92, 0.3);
   --color-surface-1:     rgba(255, 255, 255, 0.02);
   --color-surface-2:     rgba(255, 255, 255, 0.04);
   --color-surface-3:     rgba(255, 255, 255, 0.07);
@@ -31,10 +32,10 @@ html { scroll-behavior: smooth; }
 
 body {
   font-family: 'Plus Jakarta Sans', sans-serif;
-  background-color: #04040a;
+  background-color: #000000;
   background-image:
-    radial-gradient(ellipse 900px 700px at -5% -5%, rgba(124, 111, 247, 0.09) 0%, transparent 60%),
-    radial-gradient(ellipse 600px 800px at 105% 105%, rgba(59, 130, 246, 0.05) 0%, transparent 60%);
+    radial-gradient(ellipse 900px 700px at -5% -5%, rgba(255, 59, 92, 0.07) 0%, transparent 60%),
+    radial-gradient(ellipse 600px 800px at 105% 105%, rgba(255, 15, 61, 0.04) 0%, transparent 60%);
   background-attachment: fixed;
   color: #f0f0f5;
   min-height: 100dvh;

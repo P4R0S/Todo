@@ -37,7 +37,7 @@ export function LoginForm() {
 
       {/* Floating orbs */}
       <div className="absolute top-[-20%] left-[-10%] w-[600px] h-[600px] rounded-full opacity-20 pointer-events-none"
-           style={{ background: 'radial-gradient(circle, rgba(124,111,247,0.4) 0%, transparent 65%)', filter: 'blur(60px)' }} />
+           style={{ background: 'radial-gradient(circle, rgba(255,59,92,0.4) 0%, transparent 65%)', filter: 'blur(60px)' }} />
       <div className="absolute bottom-[-20%] right-[-10%] w-[500px] h-[500px] rounded-full opacity-15 pointer-events-none"
            style={{ background: 'radial-gradient(circle, rgba(59,130,246,0.4) 0%, transparent 65%)', filter: 'blur(60px)' }} />
 
@@ -49,8 +49,8 @@ export function LoginForm() {
       >
         {/* Logo */}
         <div className="flex flex-col items-center mb-8">
-          <div className="w-12 h-12 rounded-2xl flex items-center justify-center mb-4 shadow-[0_0_30px_rgba(124,111,247,0.5)]"
-               style={{ background: 'linear-gradient(135deg, #7C6FF7 0%, #5E9EF7 100%)' }}>
+          <div className="w-12 h-12 rounded-2xl flex items-center justify-center mb-4 shadow-[0_0_30px_rgba(255,59,92,0.5)]"
+               style={{ background: 'linear-gradient(135deg, #FF3B5C 0%, #FF0F3D 100%)' }}>
             <Focus className="w-6 h-6 text-white" strokeWidth={1.8} />
           </div>
           <h1 className="text-[26px] font-bold tracking-tight text-[#f0f0f5]"
@@ -64,7 +64,7 @@ export function LoginForm() {
 
         {/* Card with gradient border */}
         <div className="rounded-2xl p-[1px]"
-             style={{ background: 'linear-gradient(135deg, rgba(124,111,247,0.25), rgba(255,255,255,0.04), rgba(94,158,247,0.15))' }}>
+             style={{ background: 'linear-gradient(135deg, rgba(255,59,92,0.25), rgba(255,255,255,0.04), rgba(255,15,61,0.15))' }}>
           <div className="rounded-[15px] p-6 space-y-4"
                style={{ background: 'rgba(8,8,18,0.95)', backdropFilter: 'blur(40px)' }}>
 
@@ -104,7 +104,7 @@ export function LoginForm() {
                   value={email}
                   onChange={e => setEmail(e.target.value)}
                   placeholder="you@example.com"
-                  className="w-full bg-[rgba(255,255,255,0.03)] border border-[rgba(255,255,255,0.08)] rounded-xl px-3.5 py-2.5 text-[13px] font-medium text-[#f0f0f5] placeholder:text-[#454a5c] outline-none focus:border-[rgba(124,111,247,0.5)] focus:bg-[rgba(124,111,247,0.05)] transition-all"
+                  className="w-full bg-[rgba(255,255,255,0.03)] border border-[rgba(255,255,255,0.08)] rounded-xl px-3.5 py-2.5 text-[13px] font-medium text-[#f0f0f5] placeholder:text-[#454a5c] outline-none focus:border-[rgba(255,59,92,0.5)] focus:bg-[rgba(255,59,92,0.05)] transition-all"
                 />
               </div>
               <div>
@@ -118,7 +118,7 @@ export function LoginForm() {
                   value={password}
                   onChange={e => setPassword(e.target.value)}
                   placeholder="••••••••"
-                  className="w-full bg-[rgba(255,255,255,0.03)] border border-[rgba(255,255,255,0.08)] rounded-xl px-3.5 py-2.5 text-[13px] font-medium text-[#f0f0f5] placeholder:text-[#454a5c] outline-none focus:border-[rgba(124,111,247,0.5)] focus:bg-[rgba(124,111,247,0.05)] transition-all"
+                  className="w-full bg-[rgba(255,255,255,0.03)] border border-[rgba(255,255,255,0.08)] rounded-xl px-3.5 py-2.5 text-[13px] font-medium text-[#f0f0f5] placeholder:text-[#454a5c] outline-none focus:border-[rgba(255,59,92,0.5)] focus:bg-[rgba(255,59,92,0.05)] transition-all"
                 />
               </div>
 
@@ -137,8 +137,8 @@ export function LoginForm() {
                 disabled={loading}
                 className="w-full py-2.5 rounded-xl text-[13px] font-bold text-white transition-all duration-150 disabled:opacity-50 mt-1"
                 style={{
-                  background: 'linear-gradient(135deg, #7C6FF7 0%, #5E9EF7 100%)',
-                  boxShadow: '0 0 24px rgba(124,111,247,0.35)',
+                  background: 'linear-gradient(135deg, #FF3B5C 0%, #FF0F3D 100%)',
+                  boxShadow: '0 0 24px rgba(255,59,92,0.35)',
                 }}
               >
                 {loading ? 'Loading…' : mode === 'signin' ? 'Sign in' : 'Create account'}
@@ -151,7 +151,7 @@ export function LoginForm() {
               <button
                 type="button"
                 onClick={() => setMode(mode === 'signin' ? 'signup' : 'signin')}
-                className="text-[#7C6FF7] hover:text-[#9d93f9] font-semibold transition-colors"
+                className="text-[#FF3B5C] hover:text-[#9d93f9] font-semibold transition-colors"
               >
                 {mode === 'signin' ? 'Sign up' : 'Sign in'}
               </button>

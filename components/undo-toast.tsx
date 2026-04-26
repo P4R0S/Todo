@@ -37,7 +37,7 @@ export function UndoToast({ message, onUndo, onExpire, duration = 5000 }: UndoTo
         <span className="text-[13px] font-medium text-[#f0f0f5] flex-1">{message}</span>
         <button
           onClick={onUndo}
-          className="text-[13px] font-bold text-[#7C6FF7] hover:text-[#9d93f9] transition-colors"
+          className="text-[13px] font-bold text-[#FF3B5C] hover:text-[#9d93f9] transition-colors"
         >
           Undo
         </button>
@@ -50,7 +50,7 @@ export function UndoToast({ message, onUndo, onExpire, duration = 5000 }: UndoTo
       </div>
       <div className="h-[2px] bg-[rgba(255,255,255,0.05)]">
         <div
-          className="h-full bg-gradient-to-r from-[#7C6FF7] to-[#5E9EF7]"
+          className="h-full bg-gradient-to-r from-[#FF3B5C] to-[#FF0F3D]"
           style={{ width: `${progress}%`, transition: 'none' }}
         />
       </div>

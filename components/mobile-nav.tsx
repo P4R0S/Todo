@@ -29,8 +29,8 @@ export function MobileNav({ projects, userEmail: _ }: MobileNavProps) {
       aria-label="Add task"
       className="w-[52px] h-[52px] rounded-full flex items-center justify-center flex-shrink-0 active:scale-90 transition-transform duration-150"
       style={{
-        background: 'linear-gradient(135deg, #7C6FF7 0%, #5E9EF7 100%)',
-        boxShadow: '0 0 24px rgba(124,111,247,0.5), 0 4px 12px rgba(0,0,0,0.4)',
+        background: 'linear-gradient(135deg, #FF3B5C 0%, #FF0F3D 100%)',
+        boxShadow: '0 0 24px rgba(255,59,92,0.5), 0 4px 12px rgba(0,0,0,0.4)',
       }}
     >
       <Plus className="w-[22px] h-[22px] text-white" strokeWidth={2.5} />
@@ -58,12 +58,12 @@ export function MobileNav({ projects, userEmail: _ }: MobileNavProps) {
                 href={href}
                 className={cn(
                   'flex-1 flex flex-col items-center gap-[3px] py-2 transition-colors duration-200',
-                  active ? 'text-[#7C6FF7]' : 'text-[#454a5c]'
+                  active ? 'text-[#FF3B5C]' : 'text-[#454a5c]'
                 )}
               >
                 <Icon className={cn('w-5 h-5 transition-all duration-200', active ? 'opacity-100' : 'opacity-60')} strokeWidth={active ? 2.5 : 1.8} />
                 <span className="text-[10px] font-bold" style={{ fontFamily: 'var(--font-display)', letterSpacing: '0.02em' }}>{label}</span>
-                {active && <div className="w-1 h-1 rounded-full bg-[#7C6FF7]" style={{ boxShadow: '0 0 6px #7C6FF7' }} />}
+                {active && <div className="w-1 h-1 rounded-full bg-[#FF3B5C]" style={{ boxShadow: '0 0 6px #FF3B5C' }} />}
               </Link>
             )
           })}
@@ -71,7 +71,7 @@ export function MobileNav({ projects, userEmail: _ }: MobileNavProps) {
           {/* Search button */}
           <button
             onClick={openSearch}
-            className="flex-1 flex flex-col items-center gap-[3px] py-2 text-[#454a5c] transition-colors duration-200 active:text-[#7C6FF7]"
+            className="flex-1 flex flex-col items-center gap-[3px] py-2 text-[#454a5c] transition-colors duration-200 active:text-[#FF3B5C]"
           >
             <Search className="w-5 h-5 opacity-60" strokeWidth={1.8} />
             <span className="text-[10px] font-bold" style={{ fontFamily: 'var(--font-display)', letterSpacing: '0.02em' }}>Search</span>
@@ -86,12 +86,12 @@ export function MobileNav({ projects, userEmail: _ }: MobileNavProps) {
                 href={href}
                 className={cn(
                   'flex-1 flex flex-col items-center gap-[3px] py-2 transition-colors duration-200',
-                  active ? 'text-[#7C6FF7]' : 'text-[#454a5c]'
+                  active ? 'text-[#FF3B5C]' : 'text-[#454a5c]'
                 )}
               >
                 <Icon className={cn('w-5 h-5 transition-all duration-200', active ? 'opacity-100' : 'opacity-60')} strokeWidth={active ? 2.5 : 1.8} />
                 <span className="text-[10px] font-bold" style={{ fontFamily: 'var(--font-display)', letterSpacing: '0.02em' }}>{label}</span>
-                {active && <div className="w-1 h-1 rounded-full bg-[#7C6FF7]" style={{ boxShadow: '0 0 6px #7C6FF7' }} />}
+                {active && <div className="w-1 h-1 rounded-full bg-[#FF3B5C]" style={{ boxShadow: '0 0 6px #FF3B5C' }} />}
               </Link>
             )
           })}

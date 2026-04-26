@@ -116,7 +116,7 @@ export function TaskDetailPanel({ task, onClose }: TaskDetailPanelProps) {
           type="date"
           value={dueDate}
           onChange={e => { setDueDate(e.target.value); save({ due_date: e.target.value || null }) }}
-          className="bg-[rgba(255,255,255,0.03)] border border-[rgba(255,255,255,0.08)] rounded-lg px-3 py-2 text-[13px] font-medium text-[#f0f0f5] outline-none focus:border-[rgba(124,111,247,0.5)] focus:bg-[rgba(124,111,247,0.05)] transition-all w-full"
+          className="bg-[rgba(255,255,255,0.03)] border border-[rgba(255,255,255,0.08)] rounded-lg px-3 py-2 text-[13px] font-medium text-[#f0f0f5] outline-none focus:border-[rgba(255,59,92,0.5)] focus:bg-[rgba(255,59,92,0.05)] transition-all w-full"
         />
       </div>
 
@@ -129,7 +129,7 @@ export function TaskDetailPanel({ task, onClose }: TaskDetailPanelProps) {
           onBlur={() => save({ notes: notes || null })}
           placeholder="Add notes..."
           rows={3}
-          className="w-full bg-[rgba(255,255,255,0.03)] border border-[rgba(255,255,255,0.08)] rounded-lg px-3 py-2.5 text-[13px] text-[#f0f0f5] placeholder:text-[#454a5c] outline-none focus:border-[rgba(124,111,247,0.5)] focus:bg-[rgba(124,111,247,0.05)] transition-all resize-none font-medium"
+          className="w-full bg-[rgba(255,255,255,0.03)] border border-[rgba(255,255,255,0.08)] rounded-lg px-3 py-2.5 text-[13px] text-[#f0f0f5] placeholder:text-[#454a5c] outline-none focus:border-[rgba(255,59,92,0.5)] focus:bg-[rgba(255,59,92,0.05)] transition-all resize-none font-medium"
         />
       </div>
 
@@ -146,8 +146,8 @@ export function TaskDetailPanel({ task, onClose }: TaskDetailPanelProps) {
                   className={cn(
                     'w-5 h-5 rounded-full border flex items-center justify-center flex-shrink-0 transition-all duration-150',
                     st.completed
-                      ? 'bg-[#7C6FF7] border-[#7C6FF7] shadow-[0_0_6px_rgba(124,111,247,0.4)]'
-                      : 'border-[rgba(255,255,255,0.18)] hover:border-[#7C6FF7]'
+                      ? 'bg-[#FF3B5C] border-[#FF3B5C] shadow-[0_0_6px_rgba(255,59,92,0.4)]'
+                      : 'border-[rgba(255,255,255,0.18)] hover:border-[#FF3B5C]'
                   )}
                 >
                   {st.completed && <Check className="w-2.5 h-2.5 text-white" strokeWidth={3} />}

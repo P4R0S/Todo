@@ -30,8 +30,8 @@ export function StatsRing({ pct, total, completed, overdue, dueToday }: StatsRin
         <svg width="120" height="120" style={{ transform: 'rotate(-90deg)' }}>
           <defs>
             <linearGradient id="ring-grad" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" stopColor="#7C6FF7" />
-              <stop offset="100%" stopColor="#5E9EF7" />
+              <stop offset="0%" stopColor="#FF3B5C" />
+              <stop offset="100%" stopColor="#FF0F3D" />
             </linearGradient>
           </defs>
           <circle cx="60" cy="60" r={r} fill="none" stroke="rgba(255,255,255,0.05)" strokeWidth="10" />

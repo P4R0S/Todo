@@ -47,8 +47,8 @@ export function AllTasksClient({ tasks, projects }: AllTasksClientProps) {
             style={{
               fontFamily: 'var(--font-display)',
               letterSpacing: '0.02em',
-              background: filter === tab.id ? 'rgba(124,111,247,0.18)' : 'transparent',
-              color: filter === tab.id ? '#7C6FF7' : '#454a5c',
+              background: filter === tab.id ? 'rgba(255,59,92,0.18)' : 'transparent',
+              color: filter === tab.id ? '#FF3B5C' : '#454a5c',
             }}
           >
             {tab.label}
